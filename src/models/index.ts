@@ -13,3 +13,5 @@ export * from './product-image.model';
 export * from './product-category.model';
 export * from './product-quantity.model';
 export * from './size.model';
+export * from './order.model';
+export * from './order-detail.model';
