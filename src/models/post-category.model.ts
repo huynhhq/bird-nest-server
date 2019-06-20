@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model({settings: {}})
-export class User extends Entity {
+export class PostCategory extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -13,50 +13,41 @@ export class User extends Entity {
     type: 'string',
     required: true,
   })
-  username: string;
+  name: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  password: string;
+  alias: string;
 
   @property({
     type: 'string',
   })
-  avatar?: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  email: string;
-
-  @property({
-    type: 'boolean',
-    required: true,
-    default: false,
-  })
-  emailConfirmed: boolean;
+  description?: string;
 
   @property({
     type: 'string',
   })
-  phone?: string;
-
-  @property({
-    type: 'boolean',
-    required: true,
-    default: false,
-  })
-  phoneConfirmed: boolean;
+  parentId?: string;
 
   @property({
     type: 'number',
     required: true,
     default: 0,
   })
-  accessFailedCount: number;
+  displayOrder: number;
+
+  @property({
+    type: 'string',
+  })
+  image?: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  content: string;
 
   @property({
     type: 'date',
@@ -81,19 +72,30 @@ export class User extends Entity {
   updatedBy?: string;
 
   @property({
+    type: 'string',
+  })
+  metaKeyword?: string;
+
+  @property({
+    type: 'string',
+  })
+  metaDescription?: string;
+
+  @property({
     type: 'boolean',
     required: true,
     default: true,
   })
   status: boolean;
 
-  constructor(data?: Partial<User>) {
+
+  constructor(data?: Partial<PostCategory>) {
     super(data);
   }
 }
 
-export interface UserRelations {
+export interface PostCategoryRelations {
   // describe navigational properties here
 }
 
-export type UserWithRelations = User & UserRelations;
+export type PostCategoryWithRelations = PostCategory & PostCategoryRelations;
