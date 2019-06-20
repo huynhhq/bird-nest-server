@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model({settings: {}})
-export class Post extends Entity {
+export class ProductCategory extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -24,25 +24,26 @@ export class Post extends Entity {
   @property({
     type: 'string',
   })
-  image?: string;
-
-  @property({
-    type: 'string',
-  })
   description?: string;
 
   @property({
     type: 'string',
-    required: true,
   })
-  content: string;
+  parentId?: string;
 
   @property({
     type: 'number',
     required: true,
     default: 0,
   })
-  viewCount: number;
+  displayOrder: number;
+
+  @property({
+    type: 'number',
+    required: true,
+    default: 0,
+  })
+  homeOrder: number;
 
   @property({
     type: 'date',
@@ -54,7 +55,7 @@ export class Post extends Entity {
     type: 'string',
     required: true,
   })
-  createBy: string;
+  createdBy: string;
 
   @property({
     type: 'date',
@@ -83,18 +84,14 @@ export class Post extends Entity {
   })
   status: boolean;
 
-  @property({
-    type: 'string',
-  })
-  postCategoryId?: string;
 
-  constructor(data?: Partial<Post>) {
+  constructor(data?: Partial<ProductCategory>) {
     super(data);
   }
 }
 
-export interface PostRelations {
+export interface ProductCategoryRelations {
   // describe navigational properties here
 }
 
-export type PostWithRelations = Post & PostRelations;
+export type ProductCategoryWithRelations = ProductCategory & ProductCategoryRelations;

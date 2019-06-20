@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model({settings: {}})
-export class Post extends Entity {
+export class Product extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -24,7 +24,27 @@ export class Post extends Entity {
   @property({
     type: 'string',
   })
-  image?: string;
+  thumbnailImage?: string;
+
+  @property({
+    type: 'number',
+    required: true,
+  })
+  price: number;
+
+  @property({
+    type: 'number',
+    required: true,
+    default: 0,
+  })
+  originalPrice: number;
+
+  @property({
+    type: 'number',
+    required: true,
+    default: 0,
+  })
+  promotionPrice: number;
 
   @property({
     type: 'string',
@@ -54,7 +74,7 @@ export class Post extends Entity {
     type: 'string',
     required: true,
   })
-  createBy: string;
+  createdBy: string;
 
   @property({
     type: 'date',
@@ -86,15 +106,15 @@ export class Post extends Entity {
   @property({
     type: 'string',
   })
-  postCategoryId?: string;
+  productCategoryId?: string;
 
-  constructor(data?: Partial<Post>) {
+  constructor(data?: Partial<Product>) {
     super(data);
   }
 }
 
-export interface PostRelations {
+export interface ProductRelations {
   // describe navigational properties here
 }
 
-export type PostWithRelations = Post & PostRelations;
+export type ProductWithRelations = Product & ProductRelations;
