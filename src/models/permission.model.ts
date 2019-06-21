@@ -1,18 +1,13 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Role} from './role.model';
+import {Function} from './function.model';
 
 @model({settings: {}})
 export class Permission extends Entity {
-  @property({
-    type: 'string',
-    id: true,
-    required: true,
-  })
+  @belongsTo(() => Role)
   roleId: string;
 
-  @property({
-    type: 'string',
-    required: true,
-  })
+  @belongsTo(() => Function)
   functionId: string;
 
   @property({
@@ -42,7 +37,6 @@ export class Permission extends Entity {
     default: false,
   })
   canDelete: boolean;
-
 
   constructor(data?: Partial<Permission>) {
     super(data);

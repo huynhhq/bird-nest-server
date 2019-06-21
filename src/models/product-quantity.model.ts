@@ -1,18 +1,13 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Product} from './product.model';
+import {Size} from './size.model';
 
 @model({settings: {}})
 export class ProductQuantity extends Entity {
-  @property({
-    type: 'string',
-    id: true,
-    required: true,
-  })
+  @belongsTo(() => Product)
   productId: string;
 
-  @property({
-    type: 'number',
-    required: true,
-  })
+  @belongsTo(() => Size)
   sizeId: number;
 
   @property({
@@ -21,7 +16,6 @@ export class ProductQuantity extends Entity {
     default: 0,
   })
   quantity: number;
-
 
   constructor(data?: Partial<ProductQuantity>) {
     super(data);
@@ -32,4 +26,5 @@ export interface ProductQuantityRelations {
   // describe navigational properties here
 }
 
-export type ProductQuantityWithRelations = ProductQuantity & ProductQuantityRelations;
+export type ProductQuantityWithRelations = ProductQuantity &
+  ProductQuantityRelations;

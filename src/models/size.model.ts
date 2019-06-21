@@ -1,4 +1,12 @@
-import {Entity, model, property} from '@loopback/repository';
+import {
+  Entity,
+  model,
+  property,
+  belongsTo,
+  hasMany,
+} from '@loopback/repository';
+import {Product} from './product.model';
+import {ProductQuantity} from './product-quantity.model';
 
 @model({settings: {}})
 export class Size extends Entity {
@@ -15,6 +23,8 @@ export class Size extends Entity {
   })
   name: string;
 
+  @hasMany(() => ProductQuantity, {keyTo: 'sizeId'})
+  productQuantites: ProductQuantity[];
 
   constructor(data?: Partial<Size>) {
     super(data);

@@ -1,4 +1,17 @@
-import {Entity, model, property} from '@loopback/repository';
+import {
+  Entity,
+  model,
+  property,
+  hasMany,
+  belongsTo,
+} from '@loopback/repository';
+import {Tag} from './tag.model';
+import {ProductTag} from './product-tag.model';
+import {ProductCategory} from './product-category.model';
+import {ProductImage} from './product-image.model';
+import {ProductQuantity} from './product-quantity.model';
+import {Size} from './size.model';
+import {OrderDetail} from './order-detail.model';
 
 @model({settings: {}})
 export class Product extends Entity {
@@ -103,10 +116,20 @@ export class Product extends Entity {
   })
   status: boolean;
 
-  @property({
-    type: 'string',
-  })
+  @belongsTo(() => ProductCategory)
   productCategoryId?: string;
+
+  @hasMany(() => Tag, {through: () => ProductTag})
+  tags?: Tag[];
+
+  @hasMany(() => ProductImage, {keyTo: 'productId'})
+  productImages?: ProductImage[];
+
+  @hasMany(() => ProductQuantity, {keyTo: 'productId'})
+  productQuantites?: ProductQuantity[];
+
+  @hasMany(() => OrderDetail, {keyTo: 'productId'})
+  orderDetails?: OrderDetail[];
 
   constructor(data?: Partial<Product>) {
     super(data);

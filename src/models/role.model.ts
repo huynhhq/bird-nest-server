@@ -1,4 +1,8 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {User} from './user.model';
+import {UserRole} from './user-role.model';
+import {Permission} from './permission.model';
+import {Function} from './function.model';
 
 @model({settings: {}})
 export class Role extends Entity {
@@ -49,6 +53,11 @@ export class Role extends Entity {
   })
   status: boolean;
 
+  @hasMany(() => User, {through: () => UserRole})
+  users?: User[];
+
+  @hasMany(() => Function, {through: () => Permission})
+  functions?: Function[];
 
   constructor(data?: Partial<Role>) {
     super(data);

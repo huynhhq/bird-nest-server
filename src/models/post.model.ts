@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {PostCategory} from './post-category.model';
 
 @model({settings: {}})
 export class Post extends Entity {
@@ -83,9 +84,7 @@ export class Post extends Entity {
   })
   status: boolean;
 
-  @property({
-    type: 'string',
-  })
+  @belongsTo(() => PostCategory)
   postCategoryId?: string;
 
   constructor(data?: Partial<Post>) {

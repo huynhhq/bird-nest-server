@@ -1,24 +1,17 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Product} from './product.model';
+import {Order} from './order.model';
+import {Size} from './size.model';
 
 @model({settings: {}})
 export class OrderDetail extends Entity {
-  @property({
-    type: 'number',
-    id: true,
-    required: true,
-  })
+  @belongsTo(() => Order)
   orderId: number;
 
-  @property({
-    type: 'string',
-    required: true,
-  })
+  @belongsTo(() => Product)
   productId: string;
 
-  @property({
-    type: 'number',
-    required: true,
-  })
+  @belongsTo(() => Size)
   sizeId: number;
 
   @property({
@@ -34,7 +27,6 @@ export class OrderDetail extends Entity {
     default: 0,
   })
   price: number;
-
 
   constructor(data?: Partial<OrderDetail>) {
     super(data);

@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {OrderDetail} from './order-detail.model';
 
 @model({settings: {}})
 export class Order extends Entity {
@@ -38,10 +39,18 @@ export class Order extends Entity {
   paymentMethod: string;
 
   @property({
+    type: 'date',
+  })
+  createdDate: string;
+
+  @property({
     type: 'boolean',
     required: true,
   })
   status: boolean;
+
+  @hasMany(() => OrderDetail, {keyTo: 'orderId'})
+  orderDetails: OrderDetail[];
 
   constructor(data?: Partial<Order>) {
     super(data);

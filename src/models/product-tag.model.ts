@@ -1,20 +1,14 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Tag} from './tag.model';
+import {Product} from './product.model';
 
 @model({settings: {}})
 export class ProductTag extends Entity {
-  @property({
-    type: 'string',
-    id: true,
-    required: true,
-  })
+  @belongsTo(() => Product)
   productId: string;
 
-  @property({
-    type: 'string',
-    required: true,
-  })
+  @belongsTo(() => Tag)
   tagId: string;
-
 
   constructor(data?: Partial<ProductTag>) {
     super(data);

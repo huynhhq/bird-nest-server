@@ -51,7 +51,7 @@
     "@loopback/context": "^1.19.0",
     "@loopback/core": "^1.8.1",
     "@loopback/openapi-v3": "^1.6.1",
-    "@loopback/repository": "^1.6.1",
+    "@loopback/repository": "git+https://git@github.com/codejamninja/loopback-next.git#npm/has-many-through",
     "@loopback/rest": "^1.15.0",
     "@loopback/rest-explorer": "^1.2.1",
     "@loopback/service-proxy": "^1.2.1",
