@@ -6,6 +6,8 @@ export {BirdNestServerApplication};
 export async function main(options: ApplicationConfig = {}) {
   const app = new BirdNestServerApplication(options);
   await app.boot();
+  // Auto-update database at start
+  await app.migrateSchema();
   await app.start();
   app.static('/assets', path.join(__dirname, 'assets'));
   const url = app.restServer.url;

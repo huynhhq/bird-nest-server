@@ -1,16 +1,13 @@
 import {DefaultCrudRepository} from '@loopback/repository';
-import {PostCategory, PostCategoryRelations} from '../models';
+import {PostCategory} from '../models';
 import {DbDataSource} from '../datasources';
 import {inject} from '@loopback/core';
 
 export class PostCategoryRepository extends DefaultCrudRepository<
   PostCategory,
-  typeof PostCategory.prototype.id,
-  PostCategoryRelations
+  typeof PostCategory.prototype.id
 > {
-  constructor(
-    @inject('datasources.db') dataSource: DbDataSource,
-  ) {
+  constructor(@inject('datasources.db') dataSource: DbDataSource) {
     super(PostCategory, dataSource);
   }
 }
