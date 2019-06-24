@@ -4,6 +4,13 @@ import {Post} from './post.model';
 
 @model({settings: {}})
 export class PostTag extends Entity {
+  @property({
+    type: 'string',
+    id: true,
+    required: true,
+  })
+  id: string;
+
   @belongsTo(() => Tag)
   tagId: number;
 

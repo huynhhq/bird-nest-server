@@ -4,6 +4,13 @@ import {Size} from './size.model';
 
 @model({settings: {}})
 export class ProductQuantity extends Entity {
+  @property({
+    type: 'string',
+    id: true,
+    required: true,
+  })
+  id: string;
+
   @belongsTo(() => Product)
   productId: string;
 

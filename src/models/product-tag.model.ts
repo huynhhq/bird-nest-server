@@ -4,6 +4,13 @@ import {Product} from './product.model';
 
 @model({settings: {}})
 export class ProductTag extends Entity {
+  @property({
+    type: 'string',
+    id: true,
+    required: true,
+  })
+  id: string;
+
   @belongsTo(() => Product)
   productId: string;
 

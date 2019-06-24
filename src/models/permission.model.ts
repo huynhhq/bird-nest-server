@@ -4,6 +4,13 @@ import {Function} from './function.model';
 
 @model({settings: {}})
 export class Permission extends Entity {
+  @property({
+    type: 'string',
+    id: true,
+    required: true,
+  })
+  id: string;
+
   @belongsTo(() => Role)
   roleId: string;
 

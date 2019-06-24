@@ -10,7 +10,6 @@ import {ProductTag} from './product-tag.model';
 import {ProductCategory} from './product-category.model';
 import {ProductImage} from './product-image.model';
 import {ProductQuantity} from './product-quantity.model';
-import {Size} from './size.model';
 import {OrderDetail} from './order-detail.model';
 
 @model({settings: {}})

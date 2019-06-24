@@ -4,6 +4,13 @@ import {User} from './user.model';
 
 @model({settings: {}})
 export class UserRole extends Entity {
+  @property({
+    type: 'string',
+    id: true,
+    required: true,
+  })
+  id: string;
+
   @belongsTo(() => User)
   userId: string;
 
