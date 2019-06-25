@@ -1,5 +1,13 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {
+  Entity,
+  model,
+  property,
+  belongsTo,
+  hasMany,
+} from '@loopback/repository';
 import {PostCategory} from './post-category.model';
+import {PostTag} from './post-tag.model';
+import {Tag} from '.';
 
 @model({settings: {}})
 export class Post extends Entity {
@@ -86,6 +94,9 @@ export class Post extends Entity {
 
   @belongsTo(() => PostCategory)
   postCategoryId?: string;
+
+  @hasMany(() => Tag, {through: () => PostTag})
+  tags?: Tag[];
 
   constructor(data?: Partial<Post>) {
     super(data);

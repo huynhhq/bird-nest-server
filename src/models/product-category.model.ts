@@ -1,4 +1,10 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {
+  Entity,
+  model,
+  property,
+  hasMany,
+  belongsTo,
+} from '@loopback/repository';
 import {Product} from './product.model';
 
 @model({settings: {}})
@@ -27,9 +33,7 @@ export class ProductCategory extends Entity {
   })
   description?: string;
 
-  @property({
-    type: 'string',
-  })
+  @belongsTo(() => ProductCategory)
   parentId?: string;
 
   @property({
@@ -87,6 +91,9 @@ export class ProductCategory extends Entity {
 
   @hasMany(() => Product, {keyTo: 'productCategoryId'})
   products?: Product[];
+
+  @hasMany(() => ProductCategory, {keyTo: 'parentId'})
+  productCategories: ProductCategory[];
 
   constructor(data?: Partial<ProductCategory>) {
     super(data);

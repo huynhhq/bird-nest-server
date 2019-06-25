@@ -1,4 +1,10 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {
+  Entity,
+  model,
+  property,
+  hasMany,
+  belongsTo,
+} from '@loopback/repository';
 import {Post} from './post.model';
 
 @model({settings: {}})
@@ -27,9 +33,7 @@ export class PostCategory extends Entity {
   })
   description?: string;
 
-  @property({
-    type: 'string',
-  })
+  @belongsTo(() => PostCategory)
   parentId?: string;
 
   @property({
@@ -91,6 +95,9 @@ export class PostCategory extends Entity {
 
   @hasMany(() => Post, {keyTo: 'postCategoryId'})
   posts?: Post[];
+
+  @hasMany(() => PostCategory, {keyTo: 'parentId'})
+  postCategories?: PostCategory[];
 
   constructor(data?: Partial<PostCategory>) {
     super(data);

@@ -11,6 +11,8 @@ import {ProductCategory} from './product-category.model';
 import {ProductImage} from './product-image.model';
 import {ProductQuantity} from './product-quantity.model';
 import {OrderDetail} from './order-detail.model';
+import {Order} from './order.model';
+import {Size} from './size.model';
 
 @model({settings: {}})
 export class Product extends Entity {
@@ -118,17 +120,17 @@ export class Product extends Entity {
   @belongsTo(() => ProductCategory)
   productCategoryId?: string;
 
-  @hasMany(() => Tag, {through: () => ProductTag})
-  tags?: Tag[];
-
   @hasMany(() => ProductImage, {keyTo: 'productId'})
   productImages?: ProductImage[];
 
-  @hasMany(() => ProductQuantity, {keyTo: 'productId'})
-  productQuantites?: ProductQuantity[];
+  @hasMany(() => Tag, {through: () => ProductTag})
+  tags?: Tag[];
 
-  @hasMany(() => OrderDetail, {keyTo: 'productId'})
-  orderDetails?: OrderDetail[];
+  @hasMany(() => Size, {through: () => ProductQuantity})
+  sizes?: Size[];
+
+  @hasMany(() => Order, {through: () => OrderDetail})
+  orders?: Order[];
 
   constructor(data?: Partial<Product>) {
     super(data);
