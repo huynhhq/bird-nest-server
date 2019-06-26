@@ -3,7 +3,15 @@ import {
   HasManyThroughRepositoryFactory,
   repository,
 } from '@loopback/repository';
-import {Product, Order, OrderDetail, Tag, ProductTag} from '../models';
+import {
+  Product,
+  Order,
+  OrderDetail,
+  Tag,
+  ProductTag,
+  Size,
+  ProductQuantity,
+} from '../models';
 import {DbDataSource} from '../datasources';
 import {inject, Getter} from '@loopback/core';
 import {
@@ -11,6 +19,8 @@ import {
   OrderDetailRepository,
   TagRepository,
   ProductTagRepository,
+  SizeRepository,
+  ProductQuantityRepository,
 } from '.';
 
 export class ProductRepository extends DefaultCrudRepository<
@@ -27,6 +37,11 @@ export class ProductRepository extends DefaultCrudRepository<
     ProductTag,
     typeof Product.prototype.id
   >;
+  public readonly sizes: HasManyThroughRepositoryFactory<
+    Size,
+    ProductQuantity,
+    typeof Product.prototype.id
+  >;
 
   constructor(
     @inject('datasources.db') dataSource: DbDataSource,
@@ -38,6 +53,10 @@ export class ProductRepository extends DefaultCrudRepository<
     tagRepositoryGetter: Getter<TagRepository>,
     @repository.getter('ProductTagRepository')
     productTagRepositoryGetter: Getter<ProductTagRepository>,
+    @repository.getter('SizeRepository')
+    sizeRepositoryGettter: Getter<SizeRepository>,
+    @repository.getter('ProductQuantityRepository')
+    productQuantityRepositoryGetter: Getter<ProductQuantityRepository>,
   ) {
     super(Product, dataSource);
     this.orders = this.createHasManyThroughRepositoryFactoryFor(
@@ -49,6 +68,11 @@ export class ProductRepository extends DefaultCrudRepository<
       'tags',
       tagRepositoryGetter,
       productTagRepositoryGetter,
+    );
+    this.sizes = this.createHasManyThroughRepositoryFactoryFor(
+      'sizes',
+      sizeRepositoryGettter,
+      productQuantityRepositoryGetter,
     );
   }
 }
