@@ -3,7 +3,41 @@ import {Product, ProductWithRelations} from './product.model';
 import {Order, OrderWithRelations} from './order.model';
 import {Size} from './size.model';
 
-@model({settings: {}})
+@model({
+  settings: {
+    foreignKeys: {
+      orderDetailOrder: {
+        name: 'orderDetailOrderId',
+        foreignKey: 'orderId',
+        entity: 'Order',
+        entityKey: 'id',
+      },
+      orderDetailProduct: {
+        name: 'orderDetailProductId',
+        foreignKey: 'productId',
+        entity: 'Product',
+        entityKey: 'id',
+      },
+      orderDetailSize: {
+        name: 'fkOrderDetailSize',
+        foreignKey: 'sizeId',
+        entity: 'Size',
+        entityKey: 'id',
+      },
+    },
+    indexes: {
+      orderDetailUnique: {
+        keys: {
+          orderId: 1,
+          productId: 1,
+        },
+        options: {
+          unique: true,
+        },
+      },
+    },
+  },
+})
 export class OrderDetail extends Entity {
   @property({
     type: 'number',

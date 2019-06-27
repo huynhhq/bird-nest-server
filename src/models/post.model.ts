@@ -9,7 +9,29 @@ import {PostCategory, PostCategoryWithRelations} from './post-category.model';
 import {PostTag} from './post-tag.model';
 import {Tag} from '.';
 
-@model({settings: {}})
+@model({
+  settings: {
+    foreignKeys: {
+      postCategory: {
+        name: 'fkPostCategory',
+        foreignKey: 'postCategoryId',
+        entity: 'PostCategory',
+        entityKey: 'id',
+      },
+    },
+    indexes: {
+      nameAliasUnique: {
+        keys: {
+          name: 1,
+          alias: 1,
+        },
+        options: {
+          unique: true,
+        },
+      },
+    },
+  },
+})
 export class Post extends Entity {
   @property({
     type: 'number',
@@ -21,12 +43,14 @@ export class Post extends Entity {
   @property({
     type: 'string',
     required: true,
+    length: 36,
   })
   name: string;
 
   @property({
     type: 'string',
     required: true,
+    length: 36,
   })
   alias: string;
 

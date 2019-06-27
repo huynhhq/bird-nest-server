@@ -17,7 +17,29 @@ import {OrderDetail} from './order-detail.model';
 import {Order} from './order.model';
 import {Size} from './size.model';
 
-@model({settings: {}})
+@model({
+  settings: {
+    foreignKeys: {
+      productCategory: {
+        name: 'fkProductCategory',
+        foreignKey: 'productCategoryId',
+        entity: 'ProductCategory',
+        entityKey: 'id',
+      },
+    },
+    indexes: {
+      nameAliasUnique: {
+        keys: {
+          name: 1,
+          alias: 1,
+        },
+        options: {
+          unique: true,
+        },
+      },
+    },
+  },
+})
 export class Product extends Entity {
   @property({
     type: 'number',
@@ -29,12 +51,14 @@ export class Product extends Entity {
   @property({
     type: 'string',
     required: true,
+    length: 36,
   })
   name: string;
 
   @property({
     type: 'string',
     required: true,
+    length: 36,
   })
   alias: string;
 

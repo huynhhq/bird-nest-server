@@ -2,7 +2,35 @@ import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Product, ProductWithRelations} from './product.model';
 import {Size, SizeWithRelations} from './size.model';
 
-@model({settings: {}})
+@model({
+  settings: {
+    foreignKeys: {
+      productQuantityProduct: {
+        name: 'productQuantityProductId',
+        foreignKey: 'productId',
+        entity: 'Product',
+        entityKey: 'id',
+      },
+      productQuantitySize: {
+        name: 'productQuantitySizeId',
+        foreignKey: 'sizeId',
+        entity: 'Size',
+        entityKey: 'id',
+      },
+    },
+    indexes: {
+      productQuantityUnique: {
+        keys: {
+          productId: 1,
+          sizeId: 1,
+        },
+        options: {
+          unique: true,
+        },
+      },
+    },
+  },
+})
 export class ProductQuantity extends Entity {
   @property({
     type: 'number',
