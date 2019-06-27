@@ -2,7 +2,35 @@ import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Tag, TagWithRelations} from './tag.model';
 import {Product, ProductWithRelations} from './product.model';
 
-@model({settings: {}})
+@model({
+  settings: {
+    foreignKeys: {
+      productTagTag: {
+        name: 'tagProductId',
+        foreignKey: 'tagId',
+        entity: 'Tag',
+        entityKey: 'id',
+      },
+      productTagProduct: {
+        name: 'productId',
+        foreignKey: 'productId',
+        entity: 'Product',
+        entityKey: 'id',
+      },
+    },
+    indexes: {
+      productTagUnique: {
+        keys: {
+          tagId: 1,
+          productId: 1,
+        },
+        options: {
+          unique: true,
+        },
+      },
+    },
+  },
+})
 export class ProductTag extends Entity {
   @property({
     type: 'number',

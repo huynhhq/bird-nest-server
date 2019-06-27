@@ -2,7 +2,35 @@ import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Role, RoleWithRelations} from './role.model';
 import {Function, FunctionWithRelations} from './function.model';
 
-@model({settings: {}})
+@model({
+  settings: {
+    foreignKeys: {
+      permissionRole: {
+        name: 'roleFunctionId',
+        foreignKey: 'roleId',
+        entity: 'Role',
+        entityKey: 'id',
+      },
+      permissionFunction: {
+        name: 'functionId',
+        foreignKey: 'functionId',
+        entity: 'Function',
+        entityKey: 'id',
+      },
+    },
+    indexes: {
+      permissionUnique: {
+        keys: {
+          roleId: 1,
+          functionId: 1,
+        },
+        options: {
+          unique: true,
+        },
+      },
+    },
+  },
+})
 export class Permission extends Entity {
   @property({
     type: 'number',
