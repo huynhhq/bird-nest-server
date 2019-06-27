@@ -1,21 +1,21 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Tag} from './tag.model';
-import {Post} from './post.model';
+import {Tag, TagWithRelations} from './tag.model';
+import {Post, PostWithRelations} from './post.model';
 
 @model({settings: {}})
 export class PostTag extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @belongsTo(() => Tag)
   tagId: number;
 
   @belongsTo(() => Post)
-  postId: string;
+  postId: number;
 
   constructor(data?: Partial<PostTag>) {
     super(data);
@@ -23,7 +23,8 @@ export class PostTag extends Entity {
 }
 
 export interface PostTagRelations {
-  // describe navigational properties here
+  post?: PostWithRelations;
+  tag?: TagWithRelations;
 }
 
 export type PostTagWithRelations = PostTag & PostTagRelations;

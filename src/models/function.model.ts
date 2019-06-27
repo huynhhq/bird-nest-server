@@ -1,15 +1,15 @@
 import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Role, RoleRelations} from './role.model';
+import {Role} from './role.model';
 import {Permission} from './permission.model';
 
 @model({settings: {}})
 export class Function extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @property({
     type: 'string',
@@ -59,8 +59,6 @@ export class Function extends Entity {
   }
 }
 
-export interface FunctionRelations {
-  roles?: RoleRelations[];
-}
+export interface FunctionRelations {}
 
 export type FunctionWithRelations = Function & FunctionRelations;

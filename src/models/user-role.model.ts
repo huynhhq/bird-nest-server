@@ -1,21 +1,49 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Role} from './role.model';
-import {User} from './user.model';
+import {Role, RoleWithRelations} from './role.model';
+import {User, UserWithRelations} from './user.model';
 
-@model({settings: {}})
+@model({
+  settings: {
+    foreignKeys: {
+      userRoleUser: {
+        name: 'userId',
+        foreignKey: 'userId',
+        entity: 'User',
+        entityKey: 'id',
+      },
+      userRoleRole: {
+        name: 'roleId',
+        foreignKey: 'roleId',
+        entity: 'Role',
+        entityKey: 'id',
+      },
+    },
+    indexes: {
+      userRoleIdUnique: {
+        keys: {
+          userId: 1,
+          roleId: 1,
+        },
+        options: {
+          unique: true,
+        },
+      },
+    },
+  },
+})
 export class UserRole extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @belongsTo(() => User)
-  userId: string;
+  userId: number;
 
   @belongsTo(() => Role)
-  roleId: string;
+  roleId: number;
 
   constructor(data?: Partial<UserRole>) {
     super(data);
@@ -23,7 +51,8 @@ export class UserRole extends Entity {
 }
 
 export interface UserRoleRelations {
-  // describe navigational properties here
+  user: UserWithRelations;
+  role: RoleWithRelations;
 }
 
 export type UserRoleWithRelations = UserRole & UserRoleRelations;

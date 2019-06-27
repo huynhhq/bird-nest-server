@@ -1,21 +1,21 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Tag} from './tag.model';
-import {Product} from './product.model';
+import {Tag, TagWithRelations} from './tag.model';
+import {Product, ProductWithRelations} from './product.model';
 
 @model({settings: {}})
 export class ProductTag extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @belongsTo(() => Product)
-  productId: string;
+  productId: number;
 
   @belongsTo(() => Tag)
-  tagId: string;
+  tagId: number;
 
   constructor(data?: Partial<ProductTag>) {
     super(data);
@@ -23,7 +23,8 @@ export class ProductTag extends Entity {
 }
 
 export interface ProductTagRelations {
-  // describe navigational properties here
+  product?: ProductWithRelations;
+  tag?: TagWithRelations;
 }
 
 export type ProductTagWithRelations = ProductTag & ProductTagRelations;

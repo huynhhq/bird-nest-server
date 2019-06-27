@@ -1,21 +1,21 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Role} from './role.model';
-import {Function} from './function.model';
+import {Role, RoleWithRelations} from './role.model';
+import {Function, FunctionWithRelations} from './function.model';
 
 @model({settings: {}})
 export class Permission extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @belongsTo(() => Role)
-  roleId: string;
+  roleId: number;
 
   @belongsTo(() => Function)
-  functionId: string;
+  functionId: number;
 
   @property({
     type: 'boolean',
@@ -51,7 +51,8 @@ export class Permission extends Entity {
 }
 
 export interface PermissionRelations {
-  // describe navigational properties here
+  role?: RoleWithRelations;
+  function?: FunctionWithRelations;
 }
 
 export type PermissionWithRelations = Permission & PermissionRelations;

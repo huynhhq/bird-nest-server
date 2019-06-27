@@ -5,11 +5,11 @@ import {UserRole} from './user-role.model';
 @model({settings: {}})
 export class User extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @property({
     type: 'string',
@@ -97,8 +97,6 @@ export class User extends Entity {
   }
 }
 
-export interface UserRelations {
-  // describe navigational properties here
-}
+export interface UserRelations {}
 
 export type UserWithRelations = User & UserRelations;

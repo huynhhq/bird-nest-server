@@ -10,11 +10,11 @@ import {Product} from './product.model';
 @model({settings: {}})
 export class ProductCategory extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @property({
     type: 'string',
@@ -34,7 +34,7 @@ export class ProductCategory extends Entity {
   description?: string;
 
   @belongsTo(() => ProductCategory)
-  parentId?: string;
+  parentId?: number;
 
   @property({
     type: 'number',

@@ -1,14 +1,14 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Product} from './product.model';
+import {Product, ProductWithRelations} from './product.model';
 
 @model({settings: {}})
 export class ProductImage extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @property({
     type: 'string',
@@ -17,7 +17,7 @@ export class ProductImage extends Entity {
   path: string;
 
   @belongsTo(() => Product)
-  productId?: string;
+  productId?: number;
 
   constructor(data?: Partial<ProductImage>) {
     super(data);
@@ -25,7 +25,7 @@ export class ProductImage extends Entity {
 }
 
 export interface ProductImageRelations {
-  // describe navigational properties here
+  product?: ProductWithRelations;
 }
 
 export type ProductImageWithRelations = ProductImage & ProductImageRelations;

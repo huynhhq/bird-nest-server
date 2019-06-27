@@ -60,7 +60,7 @@ export class ProductRepository extends DefaultCrudRepository<
   ) {
     super(Product, dataSource);
     this.orders = this.createHasManyThroughRepositoryFactoryFor(
-      'products',
+      'orders',
       orderRepositoryGetter,
       orderDetailRepositoryGetter,
     );

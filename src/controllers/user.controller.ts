@@ -92,7 +92,7 @@ export class UserController {
       },
     },
   })
-  async findById(@param.path.string('id') id: string): Promise<User> {
+  async findById(@param.path.number('id') id: number): Promise<User> {
     return await this.userRepository.findById(id);
   }
 
@@ -104,7 +104,7 @@ export class UserController {
     },
   })
   async updateById(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @requestBody() user: User,
   ): Promise<void> {
     await this.userRepository.updateById(id, user);
@@ -118,7 +118,7 @@ export class UserController {
     },
   })
   async replaceById(
-    @param.path.string('id') id: string,
+    @param.path.number('id') id: number,
     @requestBody() user: User,
   ): Promise<void> {
     await this.userRepository.replaceById(id, user);
@@ -131,7 +131,7 @@ export class UserController {
       },
     },
   })
-  async deleteById(@param.path.string('id') id: string): Promise<void> {
+  async deleteById(@param.path.number('id') id: number): Promise<void> {
     await this.userRepository.deleteById(id);
   }
 }

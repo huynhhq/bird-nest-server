@@ -7,7 +7,10 @@ import {
 } from '@loopback/repository';
 import {Tag} from './tag.model';
 import {ProductTag} from './product-tag.model';
-import {ProductCategory} from './product-category.model';
+import {
+  ProductCategory,
+  ProductCategoryWithRelations,
+} from './product-category.model';
 import {ProductImage} from './product-image.model';
 import {ProductQuantity} from './product-quantity.model';
 import {OrderDetail} from './order-detail.model';
@@ -17,11 +20,11 @@ import {Size} from './size.model';
 @model({settings: {}})
 export class Product extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @property({
     type: 'string',
@@ -118,7 +121,7 @@ export class Product extends Entity {
   status: boolean;
 
   @belongsTo(() => ProductCategory)
-  productCategoryId?: string;
+  productCategoryId?: number;
 
   @hasMany(() => ProductImage, {keyTo: 'productId'})
   productImages?: ProductImage[];
@@ -138,7 +141,7 @@ export class Product extends Entity {
 }
 
 export interface ProductRelations {
-  // describe navigational properties here
+  productCategory?: ProductCategoryWithRelations;
 }
 
 export type ProductWithRelations = Product & ProductRelations;

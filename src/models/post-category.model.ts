@@ -10,11 +10,11 @@ import {Post} from './post.model';
 @model({settings: {}})
 export class PostCategory extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @property({
     type: 'string',
@@ -34,7 +34,7 @@ export class PostCategory extends Entity {
   description?: string;
 
   @belongsTo(() => PostCategory)
-  parentId?: string;
+  parentId?: number;
 
   @property({
     type: 'number',

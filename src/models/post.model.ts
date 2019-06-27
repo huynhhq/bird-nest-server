@@ -5,18 +5,18 @@ import {
   belongsTo,
   hasMany,
 } from '@loopback/repository';
-import {PostCategory} from './post-category.model';
+import {PostCategory, PostCategoryWithRelations} from './post-category.model';
 import {PostTag} from './post-tag.model';
 import {Tag} from '.';
 
 @model({settings: {}})
 export class Post extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @property({
     type: 'string',
@@ -93,7 +93,7 @@ export class Post extends Entity {
   status: boolean;
 
   @belongsTo(() => PostCategory)
-  postCategoryId?: string;
+  postCategoryId?: number;
 
   @hasMany(() => Tag, {through: () => PostTag})
   tags?: Tag[];
@@ -104,7 +104,7 @@ export class Post extends Entity {
 }
 
 export interface PostRelations {
-  // describe navigational properties here
+  postCategory?: PostCategoryWithRelations;
 }
 
 export type PostWithRelations = Post & PostRelations;

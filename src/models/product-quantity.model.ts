@@ -1,18 +1,18 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Product} from './product.model';
-import {Size} from './size.model';
+import {Product, ProductWithRelations} from './product.model';
+import {Size, SizeWithRelations} from './size.model';
 
 @model({settings: {}})
 export class ProductQuantity extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @belongsTo(() => Product)
-  productId: string;
+  productId: number;
 
   @belongsTo(() => Size)
   sizeId: number;
@@ -30,7 +30,8 @@ export class ProductQuantity extends Entity {
 }
 
 export interface ProductQuantityRelations {
-  // describe navigational properties here
+  product: ProductWithRelations;
+  size: SizeWithRelations;
 }
 
 export type ProductQuantityWithRelations = ProductQuantity &

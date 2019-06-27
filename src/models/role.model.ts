@@ -7,11 +7,11 @@ import {Function} from './function.model';
 @model({settings: {}})
 export class Role extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @property({
     type: 'string',
