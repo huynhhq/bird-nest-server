@@ -1,20 +1,20 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {Role, RoleWithRelations} from './role.model';
-import {Function, FunctionWithRelations} from './function.model';
+import {Functions, FunctionsWithRelations} from './functions.model';
 
 @model({
   settings: {
     foreignKeys: {
       permissionRole: {
-        name: 'roleFunctionId',
+        name: 'roleFunctionsId',
         foreignKey: 'roleId',
         entity: 'Role',
         entityKey: 'id',
       },
-      permissionFunction: {
-        name: 'functionId',
-        foreignKey: 'functionId',
-        entity: 'Function',
+      permissionFunctions: {
+        name: 'functionsId',
+        foreignKey: 'functionsId',
+        entity: 'Functions',
         entityKey: 'id',
       },
     },
@@ -22,7 +22,7 @@ import {Function, FunctionWithRelations} from './function.model';
       permissionUnique: {
         keys: {
           roleId: 1,
-          functionId: 1,
+          functionsId: 1,
         },
         options: {
           unique: true,
@@ -42,8 +42,8 @@ export class Permission extends Entity {
   @belongsTo(() => Role)
   roleId: number;
 
-  @belongsTo(() => Function)
-  functionId: number;
+  @belongsTo(() => Functions)
+  functionsId: number;
 
   @property({
     type: 'boolean',
@@ -80,7 +80,7 @@ export class Permission extends Entity {
 
 export interface PermissionRelations {
   role?: RoleWithRelations;
-  function?: FunctionWithRelations;
+  function?: FunctionsWithRelations;
 }
 
 export type PermissionWithRelations = Permission & PermissionRelations;

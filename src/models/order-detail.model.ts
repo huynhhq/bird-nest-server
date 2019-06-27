@@ -44,7 +44,7 @@ export class OrderDetail extends Entity {
     id: true,
     required: true,
   })
-  id: string;
+  id: number;
 
   @belongsTo(() => Order)
   orderId: number;

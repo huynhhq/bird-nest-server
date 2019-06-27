@@ -3,13 +3,13 @@ import {
   HasManyThroughRepositoryFactory,
   repository,
 } from '@loopback/repository';
-import {Role, User, UserRole, Function, Permission} from '../models';
+import {Role, User, UserRole, Functions, Permission} from '../models';
 import {DbDataSource} from '../datasources';
 import {inject, Getter} from '@loopback/core';
 import {
   UserRepository,
   UserRoleRepository,
-  FunctionRepository,
+  FunctionsRepository,
   PermissionRepository,
 } from '.';
 
@@ -24,7 +24,7 @@ export class RoleRepository extends DefaultCrudRepository<
   >;
 
   public readonly functions: HasManyThroughRepositoryFactory<
-    Function,
+    Functions,
     Permission,
     typeof Role.prototype.id
   >;
@@ -36,7 +36,7 @@ export class RoleRepository extends DefaultCrudRepository<
     @repository.getter('UserRoleRepository')
     userRoleRepositoryGetter: Getter<UserRoleRepository>,
     @repository.getter('FunctionRepository')
-    functionRepositoryGetter: Getter<FunctionRepository>,
+    functionsRepositoryGetter: Getter<FunctionsRepository>,
     @repository.getter('PermissionRepository')
     permissionRepositoryGetter: Getter<PermissionRepository>,
   ) {
@@ -48,7 +48,7 @@ export class RoleRepository extends DefaultCrudRepository<
     );
     this.functions = this.createHasManyThroughRepositoryFactoryFor(
       'functions',
-      functionRepositoryGetter,
+      functionsRepositoryGetter,
       permissionRepositoryGetter,
     );
   }

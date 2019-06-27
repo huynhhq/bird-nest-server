@@ -1,4 +1,3 @@
-export * from './function.repository';
 export * from './order-detail.repository';
 export * from './user.repository';
 export * from './order.repository';
@@ -15,3 +14,4 @@ export * from './role.repository';
 export * from './size.repository';
 export * from './tag.repository';
 export * from './user-role.repository';
+export * from './functions.repository';

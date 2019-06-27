@@ -3,7 +3,7 @@ import {Role} from './role.model';
 import {Permission} from './permission.model';
 
 @model({settings: {}})
-export class Function extends Entity {
+export class Functions extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -54,11 +54,11 @@ export class Function extends Entity {
   @hasMany(() => Role, {through: () => Permission})
   roles?: Role[];
 
-  constructor(data?: Partial<Function>) {
+  constructor(data?: Partial<Functions>) {
     super(data);
   }
 }
 
-export interface FunctionRelations {}
+export interface FunctionsRelations {}
 
-export type FunctionWithRelations = Function & FunctionRelations;
+export type FunctionsWithRelations = Functions & FunctionsRelations;

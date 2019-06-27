@@ -1,7 +1,6 @@
 export * from './user.model';
 export * from './user-role.model';
 export * from './role.model';
-export * from './function.model';
 export * from './permission.model';
 export * from './tag.model';
 export * from './post.model';
@@ -15,3 +14,4 @@ export * from './product-quantity.model';
 export * from './size.model';
 export * from './order.model';
 export * from './order-detail.model';
+export * from './functions.model';
