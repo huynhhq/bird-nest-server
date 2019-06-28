@@ -36,6 +36,7 @@ export class UserRole extends Entity {
     type: 'number',
     id: true,
     required: true,
+    generated: true,
   })
   id: number;
 

@@ -36,6 +36,7 @@ export class ProductTag extends Entity {
     type: 'number',
     id: true,
     required: true,
+    generated: true,
   })
   id: number;
 

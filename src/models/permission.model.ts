@@ -35,6 +35,7 @@ export class Permission extends Entity {
   @property({
     type: 'number',
     id: true,
+    generated: true,
     required: true,
   })
   id: number;

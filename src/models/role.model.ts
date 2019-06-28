@@ -10,6 +10,7 @@ export class Role extends Entity {
     type: 'number',
     id: true,
     required: true,
+    generated: true,
   })
   id: number;
 
