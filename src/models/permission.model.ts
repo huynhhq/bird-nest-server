@@ -4,6 +4,7 @@ import {Functions, FunctionsWithRelations} from './functions.model';
 
 @model({
   settings: {
+    forceId: false,
     foreignKeys: {
       permissionRole: {
         name: 'roleFunctionsId',

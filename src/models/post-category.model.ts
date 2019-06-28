@@ -7,7 +7,7 @@ import {
 } from '@loopback/repository';
 import {Post} from './post.model';
 
-@model({settings: {}})
+@model({settings: {forceId: false}})
 export class PostCategory extends Entity {
   @property({
     type: 'number',

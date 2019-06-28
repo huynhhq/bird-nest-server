@@ -2,7 +2,7 @@ import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Role} from './role.model';
 import {Permission} from './permission.model';
 
-@model({settings: {}})
+@model({settings: {forceId: false}})
 export class Functions extends Entity {
   @property({
     type: 'number',

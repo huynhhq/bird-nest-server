@@ -4,7 +4,7 @@ import {UserRole} from './user-role.model';
 import {Permission} from './permission.model';
 import {Functions} from './functions.model';
 
-@model({settings: {}})
+@model({settings: {forceId: false}})
 export class Role extends Entity {
   @property({
     type: 'number',

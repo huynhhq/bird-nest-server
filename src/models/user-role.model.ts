@@ -4,6 +4,7 @@ import {User, UserWithRelations} from './user.model';
 
 @model({
   settings: {
+    forceId: false,
     foreignKeys: {
       userRoleUser: {
         name: 'userId',

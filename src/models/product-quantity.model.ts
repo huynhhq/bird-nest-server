@@ -4,6 +4,7 @@ import {Size, SizeWithRelations} from './size.model';
 
 @model({
   settings: {
+    forceId: false,
     foreignKeys: {
       productQuantityProduct: {
         name: 'productQuantityProductId',

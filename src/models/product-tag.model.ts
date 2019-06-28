@@ -4,6 +4,7 @@ import {Product, ProductWithRelations} from './product.model';
 
 @model({
   settings: {
+    forceId: false,
     foreignKeys: {
       productTagTag: {
         name: 'tagProductId',

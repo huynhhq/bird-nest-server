@@ -4,6 +4,7 @@ import {Post, PostWithRelations} from './post.model';
 
 @model({
   settings: {
+    forceId: false,
     foreignKeys: {
       postTagTag: {
         name: 'tagPostId',

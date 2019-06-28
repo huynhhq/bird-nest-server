@@ -4,7 +4,7 @@ import {ProductTag} from './product-tag.model';
 import {Post} from './post.model';
 import {PostTag} from './post-tag.model';
 
-@model({settings: {}})
+@model({settings: {forceId: false}})
 export class Tag extends Entity {
   @property({
     type: 'number',

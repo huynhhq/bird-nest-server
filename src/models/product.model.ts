@@ -19,6 +19,7 @@ import {Size} from './size.model';
 
 @model({
   settings: {
+    forceId: false,
     foreignKeys: {
       productCategory: {
         name: 'fkProductCategory',

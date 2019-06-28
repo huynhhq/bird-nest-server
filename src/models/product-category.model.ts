@@ -7,7 +7,7 @@ import {
 } from '@loopback/repository';
 import {Product} from './product.model';
 
-@model({settings: {}})
+@model({settings: {forceId: false}})
 export class ProductCategory extends Entity {
   @property({
     type: 'number',

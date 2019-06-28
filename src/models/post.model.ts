@@ -11,6 +11,7 @@ import {Tag} from '.';
 
 @model({
   settings: {
+    forceId: false,
     foreignKeys: {
       postCategory: {
         name: 'fkPostCategory',

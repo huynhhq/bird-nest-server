@@ -2,7 +2,7 @@ import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Product} from './product.model';
 import {ProductQuantity} from './product-quantity.model';
 
-@model({settings: {}})
+@model({settings: {forceId: false}})
 export class Size extends Entity {
   @property({
     type: 'number',
