@@ -2,7 +2,11 @@ import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Role} from './role.model';
 import {UserRole} from './user-role.model';
 
-@model({settings: {forceId: false}})
+@model({
+  settings: {
+    forceId: false,
+  },
+})
 export class User extends Entity {
   @property({
     type: 'number',

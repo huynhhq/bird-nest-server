@@ -22,8 +22,17 @@ import {UserRepository} from '../repositories';
 export class UserController {
   constructor(
     @repository(UserRepository)
-    public userRepository : UserRepository,
+    public userRepository: UserRepository,
   ) {}
+
+  @post('/login', {
+    responses: {
+      '200': {
+        description: 'Login to bird nest system',
+      },
+    },
+  })
+  async login(@requestBody() loginModel: LoginModel): Promise<LoginModel> {}
 
   @post('/users', {
     responses: {
@@ -64,7 +73,8 @@ export class UserController {
     },
   })
   async find(
-    @param.query.object('filter', getFilterSchemaFor(User)) filter?: Filter<User>,
+    @param.query.object('filter', getFilterSchemaFor(User))
+    filter?: Filter<User>,
   ): Promise<User[]> {
     return await this.userRepository.find(filter);
   }

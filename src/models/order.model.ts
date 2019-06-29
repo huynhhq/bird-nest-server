@@ -2,7 +2,11 @@ import {Entity, model, property, hasMany} from '@loopback/repository';
 import {OrderDetail} from './order-detail.model';
 import {Product} from './product.model';
 
-@model({settings: {forceId: false}})
+@model({
+  settings: {
+    forceId: false,
+  },
+})
 export class Order extends Entity {
   @property({
     type: 'number',
