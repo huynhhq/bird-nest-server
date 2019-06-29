@@ -18,6 +18,7 @@ import {
 } from '@loopback/rest';
 import {User} from '../models';
 import {UserRepository} from '../repositories';
+import {LoginModel} from '../models/request_response_model/login.model';
 
 export class UserController {
   constructor(
@@ -32,7 +33,9 @@ export class UserController {
       },
     },
   })
-  async login(@requestBody() loginModel: LoginModel): Promise<LoginModel> {}
+  async login(@requestBody() loginModel: LoginModel): Promise<LoginModel> {
+    return await this.userRepository.login(loginModel);
+  }
 
   @post('/users', {
     responses: {

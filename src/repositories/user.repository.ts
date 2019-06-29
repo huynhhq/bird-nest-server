@@ -8,6 +8,7 @@ import {DbDataSource} from '../datasources';
 import {inject, Getter} from '@loopback/core';
 import {RoleRepository} from './role.repository';
 import {UserRoleRepository} from './user-role.repository';
+import {LoginModel} from '../models/request_response_model/login.model';
 
 export class UserRepository extends DefaultCrudRepository<
   User,
@@ -32,5 +33,9 @@ export class UserRepository extends DefaultCrudRepository<
       roleRepositoryGetter,
       userRoleRepositoryGetter,
     );
+  }
+
+  public login(loginModel: LoginModel): LoginModel | PromiseLike<LoginModel> {
+    throw new Error('Method not implemented.');
   }
 }
