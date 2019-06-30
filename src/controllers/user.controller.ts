@@ -19,6 +19,7 @@ import {
 import {User} from '../models';
 import {UserRepository} from '../repositories';
 import {LoginModel} from '../models/request_response_model/login.model';
+import {LoginResponseModel} from '../models/request_response_model';
 
 export class UserController {
   constructor(
@@ -33,7 +34,9 @@ export class UserController {
       },
     },
   })
-  async login(@requestBody() loginModel: LoginModel): Promise<LoginModel> {
+  async login(
+    @requestBody() loginModel: LoginModel,
+  ): Promise<LoginResponseModel> {
     return await this.userRepository.login(loginModel);
   }
 
