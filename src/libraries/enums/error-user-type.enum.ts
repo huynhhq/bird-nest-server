@@ -1,0 +1,4 @@
+export enum ErrorUSerType {
+  EMAIL_NOT_FOUND = 'EMAIL_NOT_FOUND',
+  PASSWORD_NOT_FOUND = 'PASSWORD_NOT_FOUND',
+}

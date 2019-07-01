@@ -20,26 +20,54 @@ import {User} from '../models';
 import {UserRepository} from '../repositories';
 import {LoginModel} from '../models/request_response_model/login.model';
 import {LoginResponseModel} from '../models/request_response_model';
+import {UserServiceBindings, TokenServiceBindings} from '../keys';
+import {
+  UserService,
+  TokenService,
+  authenticate,
+} from '@loopback/authentication';
+import {inject} from '@loopback/core';
 
 export class UserController {
   constructor(
     @repository(UserRepository)
     public userRepository: UserRepository,
+    @inject(UserServiceBindings.USER_SERVICE)
+    public userService: UserService<User, LoginModel>,
+    @inject(TokenServiceBindings.TOKEN_SERVICE)
+    public jwtService: TokenService,
   ) {}
 
   @post('/login', {
     responses: {
       '200': {
-        description: 'Login to bird nest system',
+        description: 'Login to bird nest system, return user info and token',
+        content: {
+          'application/json': {schema: {'x-ts-type': LoginResponseModel}},
+        },
       },
     },
   })
   async login(
     @requestBody() loginModel: LoginModel,
   ): Promise<LoginResponseModel> {
-    return await this.userRepository.login(loginModel);
+    // ensure the user exists, and the password is correct
+    const user = await this.userService.verifyCredentials(loginModel);
+
+    // convert a User object into a UserProfile object (reduced set of properties)
+    const userProfile = {
+      id: user.id,
+      email: user.email,
+      avatar: user.avatar,
+      phone: user.phone,
+    };
+
+    // create a JSON Web Token based on the user profile
+    const token = await this.jwtService.generateToken(userProfile);
+    return {...userProfile, token};
   }
 
+  @authenticate('basic')
   @post('/users', {
     responses: {
       '200': {
