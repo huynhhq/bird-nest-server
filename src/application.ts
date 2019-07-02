@@ -39,7 +39,8 @@ export class BirdNestServerApplication extends BootMixin(
     // Bind authentication component related elements
     this.component(AuthenticationComponent);
 
-    registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    registerAuthenticationStrategy(this as any, JWTAuthenticationStrategy);
 
     // this.bind(AuthenticationBindings.STRATEGY).toProvider(JWTAuthenticationStrategy);
     // Set up default home page

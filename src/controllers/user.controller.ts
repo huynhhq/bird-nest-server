@@ -57,9 +57,9 @@ export class UserController {
     // convert a User object into a UserProfile object (reduced set of properties)
     const userProfile = {
       id: user.id,
+      name: user.fullName,
       email: user.email,
       avatar: user.avatar,
-      phone: user.phone,
     };
 
     // create a JSON Web Token based on the user profile
