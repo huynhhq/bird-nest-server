@@ -62,7 +62,7 @@
     "loopback-connector-mysql": "^5.4.1",
     "nvm": "0.0.4",
     "passport-http": "^0.3.0",
-    "yarn": "^1.16.0"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "@loopback/build": "^2.0.2",
